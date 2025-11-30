@@ -1,33 +1,39 @@
 
-// Utility Functions
 
 /**
- * Capitalizes the first letter of each word in the input string.
- * @param {string} input - The input string.
- * @returns {string} - The formatted string.
+ * @param {string} input 
+ * @returns {string}
  */
 function capitalizeWords(input) {
-    return input.replace(/\b\w/g, char => char.toUpperCase());
+  if (!input) return '';
+  return input
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 }
 
 /**
- * Filters active users from the array.
- * @param {Array} users - An array of user objects.
- * @returns {Array} - An array of active user objects.
+ * @param {Array<{name: string, isActive: boolean}>} users
+ * @returns {Array}
  */
 function filterActiveUsers(users) {
-    return users.filter(user => user.isActive);
+  if (!Array.isArray(users)) return [];
+  return users.filter(user => user.isActive === true);
 }
 
 /**
- * Logs an action performed by a user with a timestamp.
- * @param {string} action - The action performed.
- * @param {string} username - The name of the user.
- * @returns {string} - The log message.
+ 
+ * @param {string} action 
+ * @param {string} username 
+ * @returns {string}
  */
 function logAction(action, username) {
-    const timestamp = new Date().toISOString();
-    return `User ${username} performed ${action} at ${timestamp}`;
+  const timestamp = new Date().toISOString();
+  return `User ${username} performed ${action} at ${timestamp}`;
 }
 
-module.exports = { capitalizeWords, filterActiveUsers, logAction };
+module.exports = {
+  capitalizeWords,
+  filterActiveUsers,
+  logAction,
+};
